@@ -20,9 +20,11 @@ public class MatrizEspiral {
         int valIn= Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese valor inicial"));
         int puntoInicio= Integer.parseInt(JOptionPane.showInputDialog(null, "Elija fila/columna para iniciar"));
         matriz = new int[filas][columnas];
-        recorrerFilaDerechaIzquerda(matriz, puntoInicio,valIn);
-        imprimirMatriz(matriz);
+        //recorrerFilaDerechaIzquerda(matriz, puntoInicio,valIn);
 
+        //4/2/22: Prueba de columna ascendente - Exitosa; por Mishell~
+        recorrerColumnaAscendente(matriz,2,2);
+        imprimirMatriz(matriz);
     }
     // parámetros: matriz, nro fila o columna, el nro en el que comienza
 
@@ -63,6 +65,16 @@ public class MatrizEspiral {
     private static void recorrerColumnaDescendente(int[][] matriz, int numeroColumna, int valorInicial) {
         int contador = valorInicial;
         for (int i = 0; i < matriz.length; i++) {
+            if (matriz[i][numeroColumna - 1] == 0) {
+                matriz[i][numeroColumna - 1] = contador;
+                contador++;
+            }
+        }
+    }
+    //4/2/22: Implementación de llenado abajo - arriba por Mishell~
+    private static void recorrerColumnaAscendente(int[][] matriz, int numeroColumna, int valorInicial){
+        int contador = valorInicial;
+        for (int i = matriz.length -1 ; i >= 0;  i--) {
             if (matriz[i][numeroColumna - 1] == 0) {
                 matriz[i][numeroColumna - 1] = contador;
                 contador++;
