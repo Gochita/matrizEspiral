@@ -22,14 +22,10 @@ public class MatrizEspiral {
 
         int filas = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese numero de filas"));
         int columnas = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese numero de columnas"));
-        int valIn= Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese valor inicial"));
-        int puntoInicio= Integer.parseInt(JOptionPane.showInputDialog(null, "Elija fila/columna para iniciar"));
         matriz = new int[filas][columnas];
-        recorrerFilaIzquierdaDerecha(puntoInicio,valIn);
-        recorrerColumnaDescendente(controlArray[0],controlArray[1]);
-        recorrerFilaDerechaIzquerda(controlArray[0],controlArray[1]);
+        controlArray[1] = 1;
+        generarMatrizEspiral(filas);
         imprimirMatriz();
-
     }
     // parámetros: matriz, nro fila o columna, el nro en el que comienza
 
@@ -38,13 +34,10 @@ public class MatrizEspiral {
 
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz[i].length; j++) {
-                System.out.print(matriz[i][j] + "  " +
-                        "");
+                System.out.print(String.format("%03d", matriz[i][j]) + " | ");
             }
             System.out.println("");
         }
-
-
     }
 
     private static void recorrerFilaIzquierdaDerecha(int numeroFila, int valorInicial) {
@@ -67,10 +60,8 @@ public class MatrizEspiral {
                 contador++;
                 controlArray[0] = i+1;
                 controlArray[1] = contador;
-
             }
         }
-
     }
 
     private static void recorrerColumnaDescendente(int numeroColumna, int valorInicial) {
@@ -81,6 +72,31 @@ public class MatrizEspiral {
                 contador++;
                 controlArray[0] = i+1;
                 controlArray[1] = contador;
+            }
+        }
+    }
+    //4/2/22: Implementación de llenado abajo - arriba por Mishell~
+    private static void recorrerColumnaAscendente(int numeroColumna, int valorInicial){
+        int contador = valorInicial;
+        for (int i = matriz.length -1 ; i >= 0;  i--) {
+            if (matriz[i][numeroColumna - 1] == 0) {
+                matriz[i][numeroColumna - 1] = contador;
+                contador++;
+                controlArray[0] = i+1;
+                controlArray[1] = contador;
+            }
+        }
+    }
+
+    private static void generarMatrizEspiral(int filas){
+        for(int i = 1; i < filas -1; i++){
+            if(matriz[i][i] == 0){
+                recorrerFilaIzquierdaDerecha(i, controlArray[1]);
+                recorrerColumnaDescendente(controlArray[0] , controlArray[1]);
+                recorrerFilaDerechaIzquerda(controlArray[0] , controlArray[1]);
+                recorrerColumnaAscendente(controlArray[0] , controlArray[1]);
+            }else{
+                break;
             }
         }
     }
