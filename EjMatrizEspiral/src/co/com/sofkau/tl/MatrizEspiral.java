@@ -24,6 +24,7 @@ public class MatrizEspiral {
         int columnas = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese numero de columnas"));
         matriz = new int[filas][columnas];
         controlArray[1] = 1;
+        //5/2/22 Prueba de metodo que genera la matriz en espiral
         generarMatrizEspiral(filas);
         imprimirMatriz();
     }
@@ -64,6 +65,7 @@ public class MatrizEspiral {
         }
     }
 
+    // 02/2/22: Implementacion de llenado de arriba - abajo por Wilton
     private static void recorrerColumnaDescendente(int numeroColumna, int valorInicial) {
         int contador = valorInicial;
         for (int i = 0; i < matriz.length; i++) {
