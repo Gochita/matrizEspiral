@@ -43,9 +43,9 @@ public class MatrizEspiral {
 
     private static void recorrerFilaIzquierdaDerecha(int numeroFila, int valorInicial) {
         int cont = valorInicial;
-        for (int i = 0; i < matriz[numeroFila-1].length; i++) {
-            if (matriz[numeroFila-1][i] == 0) {
-                matriz[numeroFila-1][i] = cont;
+        for (int i = 0; i < matriz[numeroFila].length; i++) {
+            if (matriz[numeroFila][i] == 0) {
+                matriz[numeroFila][i] = cont;
                 cont++;
                 controlArray[0] = i+1;
                 controlArray[1] = cont;
@@ -55,9 +55,9 @@ public class MatrizEspiral {
 
     private static void recorrerFilaDerechaIzquerda(int numeroFila, int valorInicial) {
         int contador = valorInicial;
-        for (int i = matriz[numeroFila-1].length-1; i >= 0; i--) {
-            if (matriz[numeroFila-1][i] == 0) {
-                matriz[numeroFila-1][i] = contador;
+        for (int i = matriz[numeroFila - 1].length-1; i >= 0; i--) {
+            if (matriz[numeroFila - 1][i] == 0) {
+                matriz[numeroFila - 1][i] = contador;
                 contador++;
                 controlArray[0] = i+1;
                 controlArray[1] = contador;
@@ -91,13 +91,14 @@ public class MatrizEspiral {
     }
 
     private static void generarMatrizEspiral(int filas){
-        for(int i = 1; i < filas -1; i++){
-            if(matriz[i][i] == 0){
+        for(int i = 0; i < filas ; i++){
+            if((matriz[i][i] == 0) && (matriz[i][i+1] == 0)){
                 recorrerFilaIzquierdaDerecha(i, controlArray[1]);
                 recorrerColumnaDescendente(controlArray[0] , controlArray[1]);
                 recorrerFilaDerechaIzquerda(controlArray[0] , controlArray[1]);
                 recorrerColumnaAscendente(controlArray[0] , controlArray[1]);
             }else{
+                recorrerColumnaDescendente(i + 1 , controlArray[1]);
                 break;
             }
         }
