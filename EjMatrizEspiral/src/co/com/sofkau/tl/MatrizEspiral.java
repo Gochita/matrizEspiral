@@ -22,6 +22,12 @@ public class MatrizEspiral {
 
         int filas = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese numero de filas"));
         int columnas = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese numero de columnas"));
+        //Validación máximo 50x50
+        while(filas>50 || columnas >50){
+            JOptionPane.showMessageDialog(null,"Ingrese de nuevo, máximo 50x50");
+            filas = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese numero de filas"));
+            columnas = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese numero de columnas"));
+        }
         matriz = new int[filas][columnas];
         controlArray[1] = 1;
         //5/2/22 Prueba de metodo que genera la matriz en espiral
