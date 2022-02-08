@@ -97,15 +97,24 @@ public class MatrizEspiral {
     }
 
     private static void generarMatrizEspiral(int filas){
-        for(int i = 0; i < filas ; i++){
-            if((matriz[i][i] == 0) && (matriz[i][i+1] == 0)){
-                recorrerFilaIzquierdaDerecha(i, controlArray[1]);
-                recorrerColumnaDescendente(controlArray[0] , controlArray[1]);
-                recorrerFilaDerechaIzquerda(controlArray[0] , controlArray[1]);
-                recorrerColumnaAscendente(controlArray[0] , controlArray[1]);
-            }else{
-                recorrerColumnaDescendente(i + 1 , controlArray[1]);
-                break;
+        if(matriz.length == 1){
+            recorrerFilaIzquierdaDerecha(0, 1);
+        }else if((matriz[filas-1].length == 1)){
+            recorrerColumnaDescendente(1,1);
+        }else{
+            for(int i = 0; i < filas ; i++){
+                if((matriz[i][i] == 0) && (matriz[i][i+1] == 0)){
+                    recorrerFilaIzquierdaDerecha(i, controlArray[1]);
+                    if(matriz[i+1][controlArray[0] - 1] != 0){
+                        break;
+                    }
+                    recorrerColumnaDescendente(controlArray[0] , controlArray[1]);
+                    recorrerFilaDerechaIzquerda(controlArray[0] , controlArray[1]);
+                    recorrerColumnaAscendente(controlArray[0] , controlArray[1]);
+                }else{
+                    recorrerColumnaDescendente(i + 1 , controlArray[1]);
+                    break;
+                }
             }
         }
     }
